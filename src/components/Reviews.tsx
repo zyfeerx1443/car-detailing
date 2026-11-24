@@ -5,44 +5,42 @@ export function Reviews() {
   return (
     <section
       id="opinie"
-      className="scroll-mt-24 border-t border-white/[0.06] py-20 sm:py-24"
+      className="scroll-mt-24 bg-white py-24 text-zinc-950 sm:py-32"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
-              Opinie klientów
-            </p>
-            <h2 className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Zaufali nam kierowcy z Warszawy
-            </h2>
-          </div>
+        {/* Centered Header + Soft Rating Pill */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#c8102e]">
+            Opinie klientów
+          </p>
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+            Zaufali nam kierowcy z Warszawy
+          </h2>
 
-          <div className="inline-flex w-fit items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5">
-            <span className="font-display text-xl font-semibold text-white">
+          <div className="mt-6 inline-flex items-center gap-3.5 rounded-full bg-[#f7f7f9] px-5 py-2.5 shadow-sm">
+            <span className="font-display text-lg font-bold text-zinc-950">
               {STUDIO_INFO.rating}
             </span>
-            <div className="h-6 w-px bg-white/10" />
-            <div>
-              <div className="flex items-center gap-0.5 text-white">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-white text-white" />
-                ))}
-              </div>
-              <div className="mt-0.5 text-[11px] text-zinc-400">
-                {STUDIO_INFO.reviewsCount}
-              </div>
+            <div className="flex items-center gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-4 w-4 fill-[#c8102e] text-[#c8102e]"
+                />
+              ))}
             </div>
+            <span className="text-xs font-medium text-zinc-500">
+              {STUDIO_INFO.reviewsCount}
+            </span>
           </div>
         </div>
 
-        {/* 3 Monochrome Review Cards */}
-        <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-3">
+        {/* 3 Soft Airy Review Cards */}
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-7">
           {REVIEWS.map((review) => (
             <article
               key={review.id}
-              className="mono-card flex flex-col justify-between rounded-2xl p-6"
+              className="soft-card-light flex flex-col justify-between rounded-3xl p-7 sm:p-8"
             >
               <div>
                 <div
@@ -52,33 +50,33 @@ export function Reviews() {
                   {Array.from({ length: review.rating }).map((_, idx) => (
                     <Star
                       key={idx}
-                      className="h-3.5 w-3.5 fill-white text-white"
+                      className="h-4 w-4 fill-[#c8102e] text-[#c8102e]"
                     />
                   ))}
                 </div>
 
-                <div className="mt-4 text-xs font-medium text-zinc-400">
-                  <span className="text-white">{review.car}</span>
-                  <span className="mx-1.5 text-zinc-600">·</span>
+                <div className="mt-4 inline-flex flex-wrap items-center gap-1.5 rounded-full bg-white px-3.5 py-1 text-xs font-medium text-zinc-600 shadow-xs">
+                  <span className="font-semibold text-zinc-950">
+                    {review.car}
+                  </span>
+                  <span className="text-zinc-300">·</span>
                   <span>{review.service}</span>
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-zinc-300">
+                <p className="mt-5 text-sm leading-relaxed text-zinc-600 sm:text-[15px]">
                   „{review.text}”
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center justify-between border-t border-white/[0.08] pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] font-display text-xs font-semibold text-white">
-                    {review.initials}
+              <div className="mt-7 flex items-center gap-3.5 pt-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-950 font-display text-xs font-bold text-white">
+                  {review.initials}
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-zinc-950">
+                    {review.author}
                   </div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">
-                      {review.author}
-                    </div>
-                    <div className="text-xs text-zinc-500">{review.date}</div>
-                  </div>
+                  <div className="text-xs text-zinc-400">{review.date}</div>
                 </div>
               </div>
             </article>

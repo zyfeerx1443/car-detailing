@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Unbounded } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -9,10 +9,10 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const unbounded = Unbounded({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-unbounded",
-  weight: ["500", "600", "700"],
+  variable: "--font-jakarta",
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={`${manrope.variable} ${unbounded.variable} dark`}>
-      <body className="font-sans antialiased bg-[#09090b] text-zinc-100">
+    <html lang="pl" className={`${manrope.variable} ${jakarta.variable}`}>
+      <body className="font-sans antialiased bg-[#0a0a0b] text-zinc-100">
         {children}
       </body>
     </html>

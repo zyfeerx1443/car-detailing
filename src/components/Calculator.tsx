@@ -100,38 +100,38 @@ export function Calculator({
   return (
     <section
       id="kalkulator"
-      className="scroll-mt-24 border-t border-white/[0.06] py-20 sm:py-24"
+      className="scroll-mt-24 bg-[#0a0a0b] py-24 text-zinc-100 sm:py-32"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        {/* Centered Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff6b81]">
             Szybka wycena w 2 krokach
           </p>
-          <h2 className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Kalkulator kosztów
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
             Wybierz segment auta i usługi — cena przeliczy się natychmiast. Przy
             wyborze min. 2 usług naliczamy 10% rabatu pakietowego.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
-          {/* Left Side: 2 Simple Steps */}
-          <div className="space-y-6 lg:col-span-7 xl:col-span-8">
+        <div className="mt-14 grid grid-cols-1 gap-7 lg:grid-cols-12 lg:items-start lg:gap-8">
+          {/* Left Side: 2 Soft Rounded Cards */}
+          <div className="space-y-7 lg:col-span-7 xl:col-span-8">
             {/* Step 1: 4 Vehicle Categories */}
-            <div className="mono-card rounded-2xl p-5 sm:p-6">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-md border border-white/15 bg-white/[0.05] font-display text-[11px] font-semibold text-white">
+            <div className="soft-card-dark rounded-3xl p-6 sm:p-8">
+              <div className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#c8102e] font-display text-xs font-bold text-white">
                   1
                 </span>
-                <h3 className="font-display text-sm font-semibold text-white sm:text-base">
+                <h3 className="font-display text-base font-bold text-white sm:text-lg">
                   Wybierz kategorię samochodu
                 </h3>
               </div>
 
-              <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <div className="mt-6 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 {VEHICLE_CLASSES.map((cls) => {
                   const active = cls.id === vehicleClass;
                   return (
@@ -140,29 +140,29 @@ export function Calculator({
                       type="button"
                       onClick={() => onChangeVehicleClass(cls.id)}
                       aria-pressed={active}
-                      className={`flex flex-col items-start rounded-xl border p-4 text-left transition-colors cursor-pointer ${
+                      className={`flex flex-col items-start rounded-2xl p-5 text-left transition-all cursor-pointer ${
                         active
-                          ? "border-white bg-white text-zinc-950"
-                          : "border-white/10 bg-white/[0.02] text-zinc-200 hover:border-white/25 hover:bg-white/[0.05]"
+                          ? "bg-white text-zinc-950 shadow-[0_16px_40px_-16px_rgba(255,255,255,0.3)]"
+                          : "bg-white/[0.04] text-zinc-200 hover:bg-white/[0.08]"
                       }`}
                     >
                       <div className="flex w-full items-center justify-between gap-2">
-                        <span className="text-sm font-semibold">
+                        <span className="text-sm font-bold sm:text-[15px]">
                           {cls.label}
                         </span>
                         <span
-                          className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${
+                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full transition-colors ${
                             active
-                              ? "border-zinc-950 bg-zinc-950 text-white"
-                              : "border-white/25"
+                              ? "bg-[#c8102e] text-white"
+                              : "bg-white/10 text-transparent"
                           }`}
                         >
-                          {active && <Check className="h-2.5 w-2.5 stroke-[3]" />}
+                          <Check className="h-3 w-3 stroke-[3]" />
                         </span>
                       </div>
                       <span
-                        className={`mt-1 text-xs ${
-                          active ? "text-zinc-600" : "text-zinc-500"
+                        className={`mt-1.5 text-xs ${
+                          active ? "text-zinc-600" : "text-zinc-400"
                         }`}
                       >
                         {cls.examples}
@@ -174,13 +174,13 @@ export function Calculator({
             </div>
 
             {/* Step 2: Services Toggles */}
-            <div className="mono-card rounded-2xl p-5 sm:p-6">
+            <div className="soft-card-dark rounded-3xl p-6 sm:p-8">
               <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-md border border-white/15 bg-white/[0.05] font-display text-[11px] font-semibold text-white">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#c8102e] font-display text-xs font-bold text-white">
                     2
                   </span>
-                  <h3 className="font-display text-sm font-semibold text-white sm:text-base">
+                  <h3 className="font-display text-base font-bold text-white sm:text-lg">
                     Zaznacz usługi
                   </h3>
                 </div>
@@ -188,7 +188,7 @@ export function Calculator({
                   <button
                     type="button"
                     onClick={onReset}
-                    className="inline-flex items-center gap-1.5 text-xs text-zinc-400 transition-colors hover:text-white cursor-pointer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-white/[0.1] hover:text-white cursor-pointer"
                   >
                     <RotateCcw className="h-3.5 w-3.5" />
                     Wyczyść
@@ -196,7 +196,7 @@ export function Calculator({
                 )}
               </div>
 
-              <div className="mt-4 divide-y divide-white/[0.07]">
+              <div className="mt-6 space-y-3">
                 {CALCULATOR_SERVICES.map((service) => {
                   const isOn = selectedServices.includes(service.id);
                   const servicePrice = service.prices[vehicleClass];
@@ -208,43 +208,43 @@ export function Calculator({
                       role="switch"
                       aria-checked={isOn}
                       onClick={() => onToggleService(service.id)}
-                      className="flex w-full items-center justify-between gap-4 py-4 text-left transition-colors first:pt-2 last:pb-1 cursor-pointer"
+                      className={`flex w-full items-center justify-between gap-4 rounded-2xl px-5 py-4 text-left transition-all cursor-pointer ${
+                        isOn
+                          ? "bg-white/[0.09] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)]"
+                          : "bg-white/[0.03] hover:bg-white/[0.06]"
+                      }`}
                     >
                       <div className="min-w-0 flex-1">
                         <div
-                          className={`text-sm font-semibold transition-colors sm:text-[15px] ${
-                            isOn ? "text-white" : "text-zinc-300"
+                          className={`text-sm font-semibold sm:text-[15px] ${
+                            isOn ? "text-white" : "text-zinc-200"
                           }`}
                         >
                           {service.title}
                         </div>
-                        <p className="mt-0.5 text-xs text-zinc-500 sm:text-sm">
+                        <p className="mt-1 text-xs leading-relaxed text-zinc-400 sm:text-sm">
                           {service.description}
                         </p>
                       </div>
 
                       <div className="flex shrink-0 items-center gap-4">
                         <span
-                          className={`font-display text-sm font-semibold tabular-nums ${
+                          className={`font-display text-sm font-bold tabular-nums sm:text-base ${
                             isOn ? "text-white" : "text-zinc-400"
                           }`}
                         >
                           {formatPLN(servicePrice)}
                         </span>
 
-                        {/* Minimalist Monochrome Switch */}
+                        {/* Smooth Rounded Switch */}
                         <div
-                          className={`relative h-6 w-11 shrink-0 rounded-full p-0.5 transition-colors ${
-                            isOn
-                              ? "bg-white"
-                              : "border border-white/15 bg-zinc-900"
+                          className={`relative h-7 w-12 shrink-0 rounded-full p-1 transition-colors ${
+                            isOn ? "bg-[#c8102e]" : "bg-white/12"
                           }`}
                         >
                           <div
-                            className={`h-5 w-5 rounded-full transition-transform ${
-                              isOn
-                                ? "translate-x-5 bg-zinc-950"
-                                : "translate-x-0 bg-zinc-500"
+                            className={`h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${
+                              isOn ? "translate-x-5" : "translate-x-0"
                             }`}
                           />
                         </div>
@@ -256,22 +256,22 @@ export function Calculator({
             </div>
           </div>
 
-          {/* Right Side: Clean Summary + Direct WhatsApp CTA */}
-          <aside className="lg:sticky lg:top-24 lg:col-span-5 xl:col-span-4">
-            <div className="mono-card rounded-2xl border-white/15 p-6">
+          {/* Right Side: Soft Sticky Summary Card */}
+          <aside className="lg:sticky lg:top-28 lg:col-span-5 xl:col-span-4">
+            <div className="soft-card-dark rounded-3xl p-7 sm:p-8">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
                   Podsumowanie
                 </span>
-                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-medium text-zinc-200">
+                <span className="rounded-full bg-white/[0.08] px-3.5 py-1 text-xs font-semibold text-white">
                   {currentClass.shortLabel}
                 </span>
               </div>
 
               {/* Selected Items */}
-              <div className="mt-5 space-y-2.5 border-b border-white/[0.08] pb-5">
+              <div className="mt-6 space-y-3 pb-6">
                 {selectedServices.length === 0 ? (
-                  <p className="py-3 text-sm text-zinc-500">
+                  <p className="rounded-2xl bg-white/[0.03] p-4 text-center text-sm text-zinc-400">
                     Wybierz min. jedną usługę z listy, aby obliczyć koszt.
                   </p>
                 ) : (
@@ -283,7 +283,7 @@ export function Calculator({
                       className="flex items-center justify-between gap-3 text-sm"
                     >
                       <span className="text-zinc-300">{item.shortTitle}</span>
-                      <span className="shrink-0 font-medium text-white tabular-nums">
+                      <span className="shrink-0 font-semibold text-white tabular-nums">
                         {formatPLN(item.prices[vehicleClass])}
                       </span>
                     </div>
@@ -293,35 +293,34 @@ export function Calculator({
 
               {/* Package Discount */}
               {summary.discountPercent > 0 ? (
-                <div className="mt-4 flex items-center justify-between rounded-xl border border-white/15 bg-white/[0.05] px-3.5 py-2.5 text-xs">
-                  <span className="font-medium text-zinc-200">
+                <div className="flex items-center justify-between rounded-2xl bg-[#c8102e]/15 px-4 py-3 text-xs">
+                  <span className="font-semibold text-[#ff8a9b]">
                     Rabat pakietowy −{summary.discountPercent}%
                   </span>
-                  <span className="font-semibold text-white tabular-nums">
+                  <span className="font-bold text-white tabular-nums">
                     −{formatPLN(summary.discountAmount)}
                   </span>
                 </div>
               ) : (
                 selectedServices.length === 1 && (
-                  <p className="mt-4 text-xs text-zinc-400">
+                  <div className="rounded-2xl bg-white/[0.04] px-4 py-3 text-xs text-zinc-300">
                     Dodaj drugą usługę, aby otrzymać{" "}
-                    <span className="font-semibold text-white">10% rabatu</span>
-                    .
-                  </p>
+                    <span className="font-bold text-white">10% rabatu</span>.
+                  </div>
                 )
               )}
 
               {/* Total */}
-              <div className="mt-5">
+              <div className="mt-6 rounded-2xl bg-white/[0.04] p-5">
                 <div className="flex items-center justify-between text-xs text-zinc-400">
                   <span>Szacowany koszt</span>
-                  <span className="inline-flex items-center gap-1 text-zinc-300">
-                    <Clock className="h-3.5 w-3.5" />
+                  <span className="inline-flex items-center gap-1.5 text-zinc-300">
+                    <Clock className="h-3.5 w-3.5 text-[#ff6b81]" />
                     {summary.estimatedTime}
                   </span>
                 </div>
-                <div className="mt-1.5 flex items-baseline gap-3">
-                  <div className="font-display text-3xl font-semibold tracking-tight text-white tabular-nums">
+                <div className="mt-2 flex items-baseline gap-3">
+                  <div className="font-display text-3xl font-bold tracking-tight text-white tabular-nums">
                     {formatPLN(summary.total)}
                   </div>
                   {summary.discountAmount > 0 && (
@@ -332,13 +331,13 @@ export function Calculator({
                 </div>
               </div>
 
-              {/* Direct Actions */}
-              <div className="mt-6 space-y-2.5">
+              {/* Soft Pill Actions */}
+              <div className="mt-6 space-y-3">
                 <a
                   href={buildWhatsAppUrl(whatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary-white flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold"
+                  className="soft-pill-crimson flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-bold"
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span>Wyślij na WhatsApp</span>
@@ -348,16 +347,16 @@ export function Calculator({
                   type="button"
                   disabled={selectedServices.length === 0}
                   onClick={() => onLockCalculation(summary)}
-                  className="btn-secondary-mono flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+                  className="soft-pill-dark-ghost flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Zarezerwuj termin</span>
                 </button>
               </div>
 
-              <p className="mt-3 text-center text-[11px] text-zinc-500">
+              <p className="mt-4 text-center text-[11px] leading-relaxed text-zinc-500">
                 Ceny brutto (z VAT). Ostateczną wycenę potwierdzamy podczas
-                oględzin auta.
+                bezpłatnych oględzin auta.
               </p>
             </div>
           </aside>

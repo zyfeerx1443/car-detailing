@@ -2,7 +2,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { STUDIO_INFO, buildWhatsAppUrl } from "@/data/studio";
 
 const HERO_STATS = [
-  { value: "Gwarancja do 5 lat", label: "Certyfikowane powłoki 9H" },
+  { value: "Gwarancja do 5 lat", label: "Certyfikowane powłoki ceramiczne" },
   { value: "8+ lat doświadczenia", label: "Zespół certyfikowanych detailerów" },
   { value: "Ponad 1 000 aut", label: "Zrealizowanych projektów w Warszawie" },
 ];
@@ -13,69 +13,67 @@ export function Hero() {
   );
 
   return (
-    <section className="relative isolate flex min-h-[92svh] items-center overflow-hidden pb-16 pt-28 sm:pt-36 lg:pb-24">
-      {/* Monochrome Studio Background */}
+    <section className="relative isolate flex min-h-[82svh] items-center overflow-hidden bg-[#0a0a0b] py-20 sm:py-28 lg:py-32">
+      {/* Cinematic Dark Studio Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <img
           src="/images/hero-car.jpg"
           alt="Samochód po detailingu i aplikacji powłoki ceramicznej w studiu w Warszawie"
-          className="h-full w-full object-cover object-[70%_center] grayscale contrast-[1.08] brightness-[0.65] lg:object-right"
+          className="h-full w-full object-cover object-center grayscale contrast-[1.08] brightness-[0.52]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#09090b] via-[#09090b]/85 to-[#09090b]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-[#09090b]/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/60 via-[#0a0a0b]/50 to-[#0a0a0b]/90" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-300">
-            <span>Studio auto detailingu</span>
-            <span className="text-zinc-600">·</span>
-            <span className="text-white">{STUDIO_INFO.city}, Mokotów</span>
-          </div>
+      <div className="mx-auto w-full max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        {/* Soft Eyebrow Pill */}
+        <div className="inline-flex items-center gap-2 rounded-full bg-black/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#ff6b81] backdrop-blur-md">
+          <span>Studio auto detailingu</span>
+          <span className="text-white/30">•</span>
+          <span className="text-zinc-200">{STUDIO_INFO.city}, Mokotów</span>
+        </div>
 
-          {/* Headline */}
-          <h1 className="mt-6 font-display text-3xl font-semibold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-            Detailing samochodowy i ochrona lakieru w{" "}
-            <span className="text-zinc-300">{STUDIO_INFO.cityLocative}</span>
-          </h1>
+        {/* Centered Bold Headline */}
+        <h1 className="mx-auto mt-6 max-w-4xl font-display text-3xl font-bold leading-[1.14] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
+          Detailing samochodowy i ochrona lakieru w {STUDIO_INFO.cityLocative}
+        </h1>
 
-          {/* Subtitle */}
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg">
-            Mycie detailingowe, korekta One-Step, powłoki ceramiczne 9H oraz
-            pranie i pielęgnacja wnętrza. Przejrzysty cennik i szybka wycena w
-            kalkulatorze online.
-          </p>
+        {/* Clean Airy Subtitle */}
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+          Mycie detailingowe, korekta One-Step, powłoki ceramiczne 9H oraz
+          pranie i pielęgnacja wnętrza. Przejrzysty cennik i szybka wycena w
+          kalkulatorze online.
+        </p>
 
-          {/* Primary Actions */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href="#kalkulator"
-              className="btn-primary-white inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold sm:w-auto sm:text-base"
-            >
-              <span>Oblicz koszt</span>
-              <ArrowRight className="h-4 w-4" />
-            </a>
+        {/* Soft Pill Buttons */}
+        <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+          <a
+            href="#kalkulator"
+            className="soft-pill-crimson inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold tracking-wide sm:w-auto sm:text-base"
+          >
+            <span>Oblicz koszt</span>
+            <ArrowRight className="h-4 w-4" />
+          </a>
 
-            <a
-              href={quickWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary-mono inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold sm:w-auto sm:text-base"
-            >
-              <MessageCircle className="h-4 w-4 text-zinc-300" />
-              <span>Wyślij na WhatsApp</span>
-            </a>
-          </div>
+          <a
+            href={quickWhatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="soft-pill-dark-ghost inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-semibold sm:w-auto sm:text-base"
+          >
+            <MessageCircle className="h-4 w-4" />
+            <span>Wyślij na WhatsApp</span>
+          </a>
+        </div>
 
-          {/* Minimalist Hairline Proof Strip */}
-          <div className="mt-12 grid grid-cols-1 gap-5 border-t border-white/10 pt-8 sm:grid-cols-3 sm:gap-6">
+        {/* Floating Soft Rounded Stat Container */}
+        <div className="mx-auto mt-14 max-w-4xl rounded-3xl bg-white/[0.06] px-6 py-6 backdrop-blur-xl sm:mt-16 sm:px-10 sm:py-7">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
             {HERO_STATS.map((stat) => (
-              <div key={stat.value}>
-                <div className="font-display text-sm font-semibold text-white sm:text-[15px]">
+              <div key={stat.value} className="text-center">
+                <div className="font-display text-base font-bold text-white">
                   {stat.value}
                 </div>
-                <div className="mt-1 text-xs leading-relaxed text-zinc-400">
+                <div className="mt-1 text-xs leading-relaxed text-zinc-300">
                   {stat.label}
                 </div>
               </div>
