@@ -62,8 +62,10 @@ def load_contacted() -> set[str]:
         return set()
     numbers = set()
     for line in CONTACTED_TXT.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line and not line.startswith("#"):
+        # Drop comments (whole-line or inline "# name — sent <date>"), whose
+        # digits would otherwise be glued onto the phone number.
+        line = line.split("#", 1)[0].strip()
+        if line:
             phone = normalize_phone(line)
             if phone:
                 numbers.add(phone)

@@ -72,7 +72,10 @@ export async function loadContacted() {
     return new Set(
       text
         .split(/\r?\n/)
-        .filter((line) => line.trim() && !line.trim().startsWith("#"))
+        // Drop whole-line and inline comments; their digits (dates) would
+        // otherwise be glued onto the phone number.
+        .map((line) => line.split("#")[0].trim())
+        .filter(Boolean)
         .map(normalizePhone)
         .filter(Boolean)
     );
