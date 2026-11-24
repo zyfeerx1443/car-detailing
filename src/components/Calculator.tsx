@@ -12,6 +12,7 @@ import {
   CALCULATOR_SERVICES,
   VehicleClassId,
   ServiceId,
+  StudioProfile,
   formatPLN,
   buildWhatsAppUrl,
 } from "@/data/studio";
@@ -29,6 +30,7 @@ export interface CalculationSummary {
 }
 
 interface CalculatorProps {
+  studio: StudioProfile;
   vehicleClass: VehicleClassId;
   selectedServices: ServiceId[];
   onChangeVehicleClass: (cls: VehicleClassId) => void;
@@ -73,6 +75,7 @@ export function buildCalculationSummary(
 }
 
 export function Calculator({
+  studio,
   vehicleClass,
   selectedServices,
   onChangeVehicleClass,
@@ -86,7 +89,7 @@ export function Calculator({
 
   const whatsappMessage =
     selectedServices.length > 0
-      ? `Dzień dobry! Proszę o potwierdzenie terminu na podstawie wyceny ze strony:\n• Klasa auta: ${
+      ? `Dzień dobry! Proszę o potwierdzenie terminu w studiu ${studio.name} na podstawie wyceny ze strony:\n• Klasa auta: ${
           summary.vehicleLabel
         }\n• Usługi: ${summary.selectedTitles.join(", ")}\n• Szacowany koszt: ${formatPLN(
           summary.total
@@ -95,7 +98,7 @@ export function Calculator({
             ? ` (z rabatem pakietowym -${summary.discountPercent}%)`
             : ""
         }`
-      : "Dzień dobry! Chciałbym umówić się na bezpłatną wycenę detailingu w Warszawie.";
+      : `Dzień dobry! Chciałbym umówić się na bezpłatną wycenę detailingu w studiu ${studio.name}.`;
 
   return (
     <section
@@ -334,7 +337,7 @@ export function Calculator({
               {/* Soft Pill Actions */}
               <div className="mt-6 space-y-3">
                 <a
-                  href={buildWhatsAppUrl(whatsappMessage)}
+                  href={buildWhatsAppUrl(whatsappMessage, studio.whatsappNumber)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="soft-pill-crimson flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-bold"

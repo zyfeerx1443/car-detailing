@@ -1,7 +1,13 @@
-import { MapPin, Clock, Phone, Mail, MessageCircle } from "lucide-react";
-import { STUDIO_INFO } from "@/data/studio";
+import { MapPin, Clock, Phone, MessageCircle } from "lucide-react";
+import { STUDIO_INFO, StudioProfile, buildWhatsAppUrl } from "@/data/studio";
 
-export function Footer() {
+export function Footer({ studio }: { studio: StudioProfile }) {
+  const footerWhatsAppUrl = buildWhatsAppUrl(
+    `Dzień dobry! Piszę ze strony studia ${studio.name}.`,
+    studio.whatsappNumber
+  );
+
+
   return (
     <footer
       id="kontakt"
@@ -12,14 +18,16 @@ export function Footer() {
         <div className="flex flex-col items-center text-center">
           <a href="#" className="inline-flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/[0.08] text-white">
-              <span className="font-display text-base font-extrabold">A</span>
+              <span className="font-display text-base font-extrabold uppercase">
+                {studio.name.charAt(0)}
+              </span>
             </div>
-            <div className="text-left leading-none">
-              <div className="font-display text-base font-bold tracking-[0.16em] text-white">
-                {STUDIO_INFO.brand}
+            <div className="min-w-0 text-left leading-none">
+              <div className="break-words font-display text-base font-bold tracking-[0.06em] text-white">
+                {studio.name}
               </div>
-              <div className="mt-1 text-[10px] font-semibold tracking-[0.22em] text-zinc-500">
-                {STUDIO_INFO.brandSub}
+              <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                Studio auto detailingu
               </div>
             </div>
           </a>
@@ -30,30 +38,21 @@ export function Footer() {
           {/* Column 1: Contact & Socials */}
           <div>
             <h3 className="border-b border-white/10 pb-3 text-xs font-bold uppercase tracking-[0.18em] text-white">
-              APEX Detailing
+              {studio.name}
             </h3>
             <ul className="mt-5 space-y-3 text-sm text-zinc-400">
               <li>
                 <a
-                  href={`mailto:${STUDIO_INFO.email}`}
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
-                >
-                  <Mail className="h-4 w-4 text-zinc-500" />
-                  <span>{STUDIO_INFO.email}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={STUDIO_INFO.phoneHref}
+                  href={studio.phoneHref}
                   className="inline-flex items-center gap-2.5 font-semibold text-white transition-colors hover:text-[#ff7b8e]"
                 >
                   <Phone className="h-4 w-4 text-zinc-400" />
-                  <span>{STUDIO_INFO.phoneDisplay}</span>
+                  <span>{studio.phoneDisplay}</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5 pt-1">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-zinc-500" />
-                <span>{STUDIO_INFO.address}</span>
+                <span>{studio.address}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-zinc-500" />
@@ -63,29 +62,13 @@ export function Footer() {
 
             <div className="mt-6 flex flex-wrap gap-2">
               <a
-                href={STUDIO_INFO.socials.whatsapp}
+                href={footerWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.08] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#c8102e]"
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 <span>WhatsApp</span>
-              </a>
-              <a
-                href={STUDIO_INFO.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-white/[0.05] px-4 py-2 text-xs font-semibold text-zinc-300 transition-colors hover:bg-white/[0.12] hover:text-white"
-              >
-                Instagram
-              </a>
-              <a
-                href={STUDIO_INFO.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-white/[0.05] px-4 py-2 text-xs font-semibold text-zinc-300 transition-colors hover:bg-white/[0.12] hover:text-white"
-              >
-                Facebook
               </a>
             </div>
           </div>
@@ -140,8 +123,8 @@ export function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/[0.06] pt-6 text-center text-xs text-zinc-500">
-          © {new Date().getFullYear()} {STUDIO_INFO.brand}{" "}
-          {STUDIO_INFO.brandSub}. Wszelkie prawa zastrzeżone · Warszawa, Polska
+          © {new Date().getFullYear()} {studio.name}. Wszelkie prawa
+          zastrzeżone · {studio.address}
         </div>
       </div>
     </footer>

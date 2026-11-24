@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  DEFAULT_STUDIO_NAME,
+  buildPageDescription,
+  buildPageTitle,
+} from "@/data/studio";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -16,10 +21,11 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+// Fallback for routes without their own metadata; the landing page
+// generates personalized metadata from URL params in app/page.tsx.
 export const metadata: Metadata = {
-  title: "APEX Detailing — Studio detailingu samochodowego w Warszawie",
-  description:
-    "Profesjonalny auto detailing w Warszawie (Mokotów): mycie detailingowe, polerowanie One-Step, powłoki ceramiczne 9H oraz pranie i detailing wnętrza. Szybka wycena online.",
+  title: buildPageTitle(DEFAULT_STUDIO_NAME),
+  description: buildPageDescription(DEFAULT_STUDIO_NAME),
 };
 
 export default function RootLayout({

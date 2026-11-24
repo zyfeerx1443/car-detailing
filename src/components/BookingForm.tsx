@@ -8,12 +8,18 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
-import { STUDIO_INFO, formatPLN, buildWhatsAppUrl } from "@/data/studio";
+import {
+  STUDIO_INFO,
+  StudioProfile,
+  formatPLN,
+  buildWhatsAppUrl,
+} from "@/data/studio";
 import type { CalculationSummary } from "./Calculator";
 
 type ContactChannel = "WhatsApp" | "Telefon";
 
 interface BookingFormProps {
+  studio: StudioProfile;
   lockedCalculation: CalculationSummary | null;
   onClearCalculation: () => void;
 }
@@ -37,6 +43,7 @@ function formatPolishPhone(raw: string): string {
 }
 
 export function BookingForm({
+  studio,
   lockedCalculation,
   onClearCalculation,
 }: BookingFormProps) {
@@ -84,12 +91,12 @@ export function BookingForm({
   };
 
   const directWhatsAppText = lockedCalculation
-    ? `Dzień dobry! Chciałbym zarezerwować termin (${lockedCalculation.vehicleLabel}: ${lockedCalculation.selectedTitles.join(
+    ? `Dzień dobry! Chciałbym zarezerwować termin w studiu ${studio.name} (${lockedCalculation.vehicleLabel}: ${lockedCalculation.selectedTitles.join(
         ", "
       )} — ${formatPLN(lockedCalculation.total)}).${
         carModel.trim() ? ` Auto: ${carModel.trim()}.` : ""
       }`
-    : `Dzień dobry! Chciałbym zarezerwować termin detailingu w Warszawie.${
+    : `Dzień dobry! Chciałbym zarezerwować termin detailingu w studiu ${studio.name}.${
         carModel.trim() ? ` Auto: ${carModel.trim()}.` : ""
       }`;
 
@@ -118,7 +125,10 @@ export function BookingForm({
 
               <div className="mt-8 space-y-4">
                 <a
-                  href={buildWhatsAppUrl(directWhatsAppText)}
+                  href={buildWhatsAppUrl(
+                    directWhatsAppText,
+                    studio.whatsappNumber
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="soft-pill-dark-ghost flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold"
@@ -128,10 +138,10 @@ export function BookingForm({
                 </a>
                 <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-zinc-400">
                   <a
-                    href={STUDIO_INFO.phoneHref}
+                    href={studio.phoneHref}
                     className="font-semibold text-white hover:underline"
                   >
-                    {STUDIO_INFO.phoneDisplay}
+                    {studio.phoneDisplay}
                   </a>
                   <span>{STUDIO_INFO.hours}</span>
                 </div>

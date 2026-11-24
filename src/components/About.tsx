@@ -1,5 +1,5 @@
 import { UserCheck, FlaskConical, Sun } from "lucide-react";
-import { PARTNER_BRANDS } from "@/data/studio";
+import { PARTNER_BRANDS, StudioProfile } from "@/data/studio";
 
 const ADVANTAGES = [
   {
@@ -18,11 +18,11 @@ const ADVANTAGES = [
     icon: Sun,
     title: "Sterylne, jasne studio",
     description:
-      "Oświetlenie inspekcyjne CRI 98 ujawnia najdrobniejsze rysy i hologramy. Stała temperatura i monitorowane stanowiska na Mokotowie.",
+      "Oświetlenie inspekcyjne CRI 98 ujawnia najdrobniejsze rysy i hologramy. Stała temperatura i monitorowane stanowiska.",
   },
 ];
 
-export function About() {
+export function About({ studio }: { studio: StudioProfile }) {
   return (
     <section
       id="o-studiu"
@@ -62,7 +62,7 @@ export function About() {
                 <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-end justify-between gap-4 sm:bottom-7 sm:left-7 sm:right-7">
                   <div>
                     <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#ff7b8e]">
-                      Mokotów · Warszawa
+                      {studio.address}
                     </div>
                     <div className="mt-1 font-display text-base font-bold text-white sm:text-lg">
                       4 stanowiska w strefie bezpyłowej

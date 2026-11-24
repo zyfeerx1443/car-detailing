@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, Mail, Clock, MapPin, ArrowUpRight } from "lucide-react";
-import { STUDIO_INFO } from "@/data/studio";
+import { Menu, X, Phone, Clock, MapPin, ArrowUpRight } from "lucide-react";
+import { STUDIO_INFO, StudioProfile } from "@/data/studio";
 
 const NAV_LINKS = [
   { href: "#uslugi", label: "Usługi" },
@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
-export function Navbar() {
+export function Navbar({ studio }: { studio: StudioProfile }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -35,28 +35,21 @@ export function Navbar() {
       {/* Top Crimson Info Bar (inspired by reference screenshot) */}
       <div className="bg-[#c8102e] text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2 text-xs font-medium sm:px-6 lg:px-8">
-          <div className="flex items-center gap-5">
+          <div className="flex min-w-0 items-center gap-5">
             <a
-              href={STUDIO_INFO.phoneHref}
-              className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-85"
+              href={studio.phoneHref}
+              className="inline-flex shrink-0 items-center gap-1.5 transition-opacity hover:opacity-85"
             >
               <Phone className="h-3.5 w-3.5" />
-              <span>{STUDIO_INFO.phoneDisplay}</span>
+              <span>{studio.phoneDisplay}</span>
             </a>
-            <a
-              href={`mailto:${STUDIO_INFO.email}`}
-              className="hidden items-center gap-1.5 transition-opacity hover:opacity-85 sm:inline-flex"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              <span>{STUDIO_INFO.email}</span>
-            </a>
+            <span className="hidden min-w-0 items-center gap-1.5 md:inline-flex">
+              <MapPin className="h-3.5 w-3.5 shrink-0" />
+              <span className="truncate">{studio.address}</span>
+            </span>
           </div>
 
-          <div className="flex items-center gap-5">
-            <span className="hidden items-center gap-1.5 md:inline-flex">
-              <MapPin className="h-3.5 w-3.5" />
-              <span>Warszawa, Mokotów</span>
-            </span>
+          <div className="flex shrink-0 items-center gap-5">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5" />
               <span>{STUDIO_INFO.hours}</span>
@@ -77,20 +70,20 @@ export function Navbar() {
           {/* Brand */}
           <a
             href="#"
-            className="flex items-center gap-3 focus:outline-none"
-            aria-label="APEX Detailing Warszawa — Strona główna"
+            className="flex min-w-0 items-center gap-3 focus:outline-none"
+            aria-label={`${studio.name} — Strona główna`}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/[0.08] text-white">
-              <span className="font-display text-base font-extrabold tracking-tight">
-                A
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/[0.08] text-white">
+              <span className="font-display text-base font-extrabold uppercase tracking-tight">
+                {studio.name.charAt(0)}
               </span>
             </div>
-            <div className="leading-none">
-              <div className="font-display text-base font-bold tracking-[0.14em] text-white">
-                {STUDIO_INFO.brand}
+            <div className="min-w-0 leading-none">
+              <div className="max-w-[11rem] truncate font-display text-base font-bold tracking-[0.04em] text-white sm:max-w-xs">
+                {studio.name}
               </div>
-              <div className="mt-1 text-[10px] font-semibold tracking-[0.22em] text-zinc-400">
-                {STUDIO_INFO.brandSub}
+              <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-400">
+                Studio auto detailingu
               </div>
             </div>
           </a>
@@ -122,7 +115,7 @@ export function Navbar() {
           {/* Mobile Buttons */}
           <div className="flex items-center gap-2 lg:hidden">
             <a
-              href={STUDIO_INFO.phoneHref}
+              href={studio.phoneHref}
               aria-label="Zadzwoń do studia"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.08] text-white"
             >
@@ -163,10 +156,10 @@ export function Navbar() {
 
             <div className="mt-5 rounded-3xl bg-white/[0.04] p-5">
               <div className="text-sm font-semibold text-white">
-                {STUDIO_INFO.phoneDisplay}
+                {studio.phoneDisplay}
               </div>
               <div className="mt-1 text-xs text-zinc-400">
-                {STUDIO_INFO.address}
+                {studio.address}
               </div>
               <a
                 href="#kalkulator"

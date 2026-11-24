@@ -1,22 +1,15 @@
+/**
+ * Static, brand-neutral defaults. Studio name, address and phone are
+ * personalized per client via URL params — see `resolveStudioProfile`.
+ */
 export const STUDIO_INFO = {
-  brand: "APEX",
-  brandSub: "DETAILING WARSAW",
-  city: "Warszawa",
-  cityLocative: "Warszawie",
   phoneDisplay: "+48 512 840 320",
   phoneHref: "tel:+48512840320",
   whatsappNumber: "48512840320",
-  email: "kontakt@apex-detailing.pl",
-  address: "ul. Cybernetyki 14, 02-677 Warszawa (Mokotów)",
   addressNote: "Monitorowany parking podziemny · wygodny dojazd",
   hours: "Pn–Sb: 08:30 – 20:00",
   rating: "5.0",
   reviewsCount: "180+ opinii w Google",
-  socials: {
-    whatsapp: "https://wa.me/48512840320",
-    instagram: "https://instagram.com/apex_detailing_warsaw",
-    facebook: "https://facebook.com/apexdetailingwarsaw",
-  },
 } as const;
 
 export type VehicleClassId = "ab" | "cd" | "suv" | "big_suv";
@@ -242,7 +235,7 @@ export const REVIEWS: ReviewItem[] = [
     service: "Mycie detailingowe + PPF przód",
     date: "Sierpień 2026",
     rating: 5,
-    text: "Czyste, minimalistyczne studio na Mokotowie z doskonałym oświetleniem. Folia ochronna na przodzie została położona z zawinięciem krawędzi — praktycznie niewidoczna. Zdecydowanie polecam każdemu, kto dba o swoje auto.",
+    text: "Czyste, minimalistyczne studio z doskonałym oświetleniem. Folia ochronna na przodzie została położona z zawinięciem krawędzi — praktycznie niewidoczna. Zdecydowanie polecam każdemu, kto dba o swoje auto.",
     initials: "KN",
   },
 ];
@@ -260,8 +253,78 @@ export function formatPLN(amount: number): string {
   return new Intl.NumberFormat("pl-PL").format(Math.round(amount)) + " zł";
 }
 
-export function buildWhatsAppUrl(message: string): string {
-  return `https://wa.me/${STUDIO_INFO.whatsappNumber}?text=${encodeURIComponent(
-    message
-  )}`;
+export function buildWhatsAppUrl(
+  message: string,
+  whatsappNumber: string = STUDIO_INFO.whatsappNumber
+): string {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+/**
+ * Per-client personalization resolved from URL search params
+ * (?name=, ?address=, ?phone=). Falls back to defaults when absent/invalid.
+ */
+export interface StudioProfile {
+  name: string;
+  address: string;
+  whatsappNumber: string;
+  phoneDisplay: string;
+  phoneHref: string;
+}
+
+export const DEFAULT_STUDIO_NAME = "Premium Detailing Warszawa";
+export const DEFAULT_STUDIO_ADDRESS = "Warszawa";
+
+type SearchParamValue = string | string[] | undefined;
+
+function firstParam(value: SearchParamValue): string {
+  const raw = Array.isArray(value) ? value[0] : value;
+  return (raw ?? "").replace(/\s+/g, " ").trim();
+}
+
+function textParam(value: SearchParamValue, fallback: string, maxLength: number) {
+  const text = firstParam(value).slice(0, maxLength).trim();
+  return text || fallback;
+}
+
+/** Normalizes a phone param to wa.me digits; 9-digit numbers are treated as Polish. */
+function normalizeWhatsAppNumber(value: SearchParamValue): string | null {
+  let digits = firstParam(value).replace(/\D/g, "");
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (digits.length === 9) digits = "48" + digits;
+  return digits.length >= 10 && digits.length <= 15 ? digits : null;
+}
+
+function formatPhoneDisplay(digits: string): string {
+  if (digits.length === 11 && digits.startsWith("48")) {
+    const local = digits.slice(2);
+    return `+48 ${local.slice(0, 3)} ${local.slice(3, 6)} ${local.slice(6)}`;
+  }
+  return `+${digits}`;
+}
+
+export function buildPageTitle(studioName: string): string {
+  return `${studioName} | Detailing & Ochrona Lakieru Warszawa`;
+}
+
+export function buildPageDescription(studioName: string): string {
+  return `${studioName} — profesjonalny auto detailing w Warszawie: mycie detailingowe, polerowanie One-Step, powłoki ceramiczne 9H oraz pranie i detailing wnętrza. Szybka wycena online.`;
+}
+
+export function resolveStudioProfile(params: {
+  name?: SearchParamValue;
+  address?: SearchParamValue;
+  phone?: SearchParamValue;
+}): StudioProfile {
+  const whatsappNumber = normalizeWhatsAppNumber(params.phone);
+
+  return {
+    name: textParam(params.name, DEFAULT_STUDIO_NAME, 80),
+    address: textParam(params.address, DEFAULT_STUDIO_ADDRESS, 140),
+    whatsappNumber: whatsappNumber ?? STUDIO_INFO.whatsappNumber,
+    phoneDisplay: whatsappNumber
+      ? formatPhoneDisplay(whatsappNumber)
+      : STUDIO_INFO.phoneDisplay,
+    phoneHref: whatsappNumber ? `tel:+${whatsappNumber}` : STUDIO_INFO.phoneHref,
+  };
 }

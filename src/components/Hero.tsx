@@ -1,5 +1,5 @@
 import { ArrowRight, MessageCircle } from "lucide-react";
-import { STUDIO_INFO, buildWhatsAppUrl } from "@/data/studio";
+import { StudioProfile, buildWhatsAppUrl } from "@/data/studio";
 
 const HERO_STATS = [
   { value: "Gwarancja do 5 lat", label: "Certyfikowane powłoki ceramiczne" },
@@ -7,9 +7,10 @@ const HERO_STATS = [
   { value: "Ponad 1 000 aut", label: "Zrealizowanych projektów w Warszawie" },
 ];
 
-export function Hero() {
+export function Hero({ studio }: { studio: StudioProfile }) {
   const quickWhatsAppUrl = buildWhatsAppUrl(
-    "Dzień dobry! Chciałbym zapytać o wolny termin i wycenę detailingu w Warszawie."
+    `Dzień dobry! Chciałbym zapytać o wolny termin i wycenę detailingu w studiu ${studio.name}.`,
+    studio.whatsappNumber
   );
 
   return (
@@ -29,12 +30,17 @@ export function Hero() {
         <div className="inline-flex items-center gap-2 rounded-full bg-black/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#ff6b81] backdrop-blur-md">
           <span>Studio auto detailingu</span>
           <span className="text-white/30">•</span>
-          <span className="text-zinc-200">{STUDIO_INFO.city}, Mokotów</span>
+          <span className="normal-case tracking-normal text-zinc-200">
+            {studio.address}
+          </span>
         </div>
 
         {/* Centered Bold Headline */}
-        <h1 className="mx-auto mt-6 max-w-4xl font-display text-3xl font-bold leading-[1.14] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-          Detailing samochodowy i ochrona lakieru w {STUDIO_INFO.cityLocative}
+        <h1 className="mx-auto mt-6 max-w-4xl break-words font-display text-3xl font-bold leading-[1.14] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
+          <span className="block">{studio.name}</span>
+          <span className="mt-2 block text-zinc-300">
+            Detailing samochodowy i ochrona lakieru
+          </span>
         </h1>
 
         {/* Clean Airy Subtitle */}

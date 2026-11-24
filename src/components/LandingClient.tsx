@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { ServiceId, VehicleClassId } from "@/data/studio";
+import { ServiceId, StudioProfile, VehicleClassId } from "@/data/studio";
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
 import { Services } from "./Services";
@@ -11,7 +11,7 @@ import { Reviews } from "./Reviews";
 import { BookingForm } from "./BookingForm";
 import { Footer } from "./Footer";
 
-export function LandingClient() {
+export function LandingClient({ studio }: { studio: StudioProfile }) {
   const [vehicleClass, setVehicleClass] = useState<VehicleClassId>("cd");
   const [selectedServices, setSelectedServices] = useState<ServiceId[]>([
     "onestep",
@@ -49,14 +49,15 @@ export function LandingClient() {
 
   return (
     <div className="min-h-screen bg-[#09090b] text-zinc-100">
-      <Navbar />
+      <Navbar studio={studio} />
       <main>
-        <Hero />
+        <Hero studio={studio} />
         <Services
           selectedServices={selectedServices}
           onSelectFromCard={handleSelectFromCard}
         />
         <Calculator
+          studio={studio}
           vehicleClass={vehicleClass}
           selectedServices={selectedServices}
           onChangeVehicleClass={setVehicleClass}
@@ -64,14 +65,15 @@ export function LandingClient() {
           onReset={() => setSelectedServices([])}
           onLockCalculation={handleLockCalculation}
         />
-        <About />
+        <About studio={studio} />
         <Reviews />
         <BookingForm
+          studio={studio}
           lockedCalculation={lockedCalculation}
           onClearCalculation={() => setLockedCalculation(null)}
         />
       </main>
-      <Footer />
+      <Footer studio={studio} />
     </div>
   );
 }
