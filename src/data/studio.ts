@@ -1,138 +1,127 @@
 export const STUDIO_INFO = {
   brand: "APEX",
-  brandSub: "DETAILING LAB",
-  cityPrepositional: "Москве",
-  city: "Москва",
-  phoneDisplay: "+7 (495) 988-42-10",
-  phoneHref: "tel:+74959884210",
-  email: "studio@apex-detailing.ru",
-  address: "г. Москва, 2-я Магистральная ул., д. 18, стр. 2",
-  addressNote: "Закрытая охраняемая территория · удобный заезд с ТТК",
-  hours: "Ежедневно с 09:00 до 21:00",
+  brandSub: "DETAILING WARSAW",
+  city: "Warszawa",
+  cityLocative: "Warszawie",
+  phoneDisplay: "+48 512 840 320",
+  phoneHref: "tel:+48512840320",
+  whatsappNumber: "48512840320",
+  email: "kontakt@apex-detailing.pl",
+  address: "ul. Cybernetyki 14, 02-677 Warszawa (Mokotów)",
+  addressNote: "Monitorowany parking podziemny · wygodny dojazd",
+  hours: "Pn–Sb: 08:30 – 20:00",
   rating: "5.0",
-  reviewsCount: "240+ отзывов на Яндекс Картах",
+  reviewsCount: "180+ opinii w Google",
   socials: {
-    telegram: "https://t.me/apex_detailing_lab",
-    whatsapp: "https://wa.me/74959884210",
-    vk: "https://vk.com/apex_detailing_lab",
-    youtube: "https://youtube.com/@apex_detailing_lab",
+    whatsapp: "https://wa.me/48512840320",
+    instagram: "https://instagram.com/apex_detailing_warsaw",
+    facebook: "https://facebook.com/apexdetailingwarsaw",
   },
 } as const;
 
-export type VehicleClassId = "sedan" | "crossover" | "suv";
+export type VehicleClassId = "ab" | "cd" | "suv" | "big_suv";
 
 export interface VehicleClass {
   id: VehicleClassId;
   label: string;
-  subtitle: string;
+  shortLabel: string;
   examples: string;
-  multiplier: number;
 }
 
 export const VEHICLE_CLASSES: VehicleClass[] = [
   {
-    id: "sedan",
-    label: "Седан",
-    subtitle: "Купе · Хэтчбек · Бизнес-класс",
-    examples: "BMW 3 / 5, Mercedes E-Class, Audi A6",
-    multiplier: 1,
+    id: "ab",
+    label: "Segment A/B (Małe)",
+    shortLabel: "Segment A/B",
+    examples: "VW Polo, Mini Cooper, Toyota Yaris",
   },
   {
-    id: "crossover",
-    label: "Кроссовер",
-    subtitle: "Компактный и средний SUV",
-    examples: "Porsche Macan, BMW X3 / X5, Li L7",
-    multiplier: 1.2,
+    id: "cd",
+    label: "Segment C/D (Sedan/Kombi)",
+    shortLabel: "Segment C/D",
+    examples: "BMW Serii 3, Audi A4, VW Passat",
   },
   {
     id: "suv",
-    label: "Внедорожник",
-    subtitle: "Полноразмерный SUV · Минивэн",
-    examples: "Range Rover, Mercedes GLS, Land Cruiser",
-    multiplier: 1.4,
+    label: "SUV / Crossover",
+    shortLabel: "SUV / Crossover",
+    examples: "Porsche Macan, BMW X3, Volvo XC60",
+  },
+  {
+    id: "big_suv",
+    label: "Duży SUV / Van",
+    shortLabel: "Duży SUV / Van",
+    examples: "Mercedes GLS, Range Rover, VW Multivan",
   },
 ];
 
 export type ServiceId =
+  | "wash"
+  | "onestep"
   | "ceramic"
-  | "ppf_front"
-  | "ppf_full"
   | "interior"
-  | "presale"
-  | "glass_wheels";
+  | "ppf_front";
 
 export interface ServiceCardItem {
   id: ServiceId;
-  calculatorIds: ServiceId[];
   title: string;
-  tag: string;
-  priceFrom: number;
+  priceRange: string;
   duration: string;
   description: string;
   highlights: string[];
-  featured?: boolean;
 }
 
 export const SERVICE_CARDS: ServiceCardItem[] = [
   {
-    id: "ceramic",
-    calculatorIds: ["ceramic"],
-    title: "Керамика и полировка",
-    tag: "Хит студии",
-    priceFrom: 35000,
-    duration: "2–3 дня",
+    id: "wash",
+    title: "Mycie detailingowe",
+    priceRange: "150 – 250 zł",
+    duration: "2–3 godz.",
     description:
-      "Многоэтапная восстановительная полировка кузова с удалением до 95% царапин и нанесением 2–3 слоёв керамики 9H.",
+      "Bezpieczne wieloetapowe mycie ręczne z dekontaminacją lakieru, czyszczeniem felg i zabezpieczeniem szybkim woskiem.",
     highlights: [
-      "Глубокая зеркальная глубина цвета и блеск",
-      "Мощный гидрофобный и антистатический эффект",
-      "Защита от реагентов, УФ и птичьего помёта до 3 лет",
+      "Piana aktywna pH neutralne i mycie na dwa wiadra",
+      "Doczyszczanie felg, nadkoli, wnęk i emblematów",
+      "Osuszanie delikatnymi ręcznikami i dressing opon",
     ],
-    featured: true,
   },
   {
-    id: "ppf_front",
-    calculatorIds: ["ppf_front"],
-    title: "Оклейка полиуретаном",
-    tag: "Максимум защиты",
-    priceFrom: 65000,
-    duration: "2–5 дней",
+    id: "onestep",
+    title: "Polerowanie One-Step",
+    priceRange: "900 – 1 200 zł",
+    duration: "1 dzień",
     description:
-      "Бронирование зон риска или полная оклейка кузова антигравийной полиуретановой плёнкой LLumar / SunTek с подворотом краёв.",
+      "Jednoetapowe odświeżenie lakieru usuwające do 65% drobnych zarysowań i hologramów. Przywraca głębię koloru i szklistość.",
     highlights: [
-      "Толщина 190–210 мкм — защита от камней и пескоструя",
-      "Эффект самовосстановления царапин при нагреве",
-      "Гарантия от пожелтения и отслоений до 5 лет",
+      "Pełna dekontaminacja chemiczna i glinkowanie",
+      "Korekta One-Step maszynami Rupes i pastami Sonax",
+      "Odtłuszczenie lakieru i zabezpieczenie woskiem",
+    ],
+  },
+  {
+    id: "ceramic",
+    title: "Powłoka ceramiczna",
+    priceRange: "1 400 – 2 000 zł",
+    duration: "2–3 dni",
+    description:
+      "Trwała ochrona lakieru certyfikowaną powłoką ceramiczną 9H. Nadaje lustrzany połysk, silną hydrofobowość i ułatwia mycie.",
+    highlights: [
+      "Przygotowanie lakieru + odświeżenie przed aplikacją",
+      "Aplikacja 2 warstw powłoki ceramicznej Gyeon / CarPro",
+      "Pisemna gwarancja ochrony od 3 do 5 lat",
     ],
   },
   {
     id: "interior",
-    calculatorIds: ["interior"],
-    title: "Детейлинг-химчистка салона",
-    tag: "Чистота и уход",
-    priceFrom: 18000,
-    duration: "1–2 дня",
+    title: "Pranie i detailing wnętrza",
+    priceRange: "450 – 700 zł",
+    duration: "1 dzień",
     description:
-      "Деликатная глубокая очистка кожи, алькантары, текстиля и декоративных вставок составами Koch-Chemie с консервацией.",
+      "Kompleksowe czyszczenie kabiny, pranie ekstrakcyjne tapicerki lub czyszczenie i matowa impregnacja skór chemią Koch-Chemie.",
     highlights: [
-      "Матовый защитный бальзам для кожи без жирного блеска",
-      "Безопасная чистка воздуховодов, швов и кнопок",
-      "Озонация салона — устранение 100% запахов и бактерий",
-    ],
-  },
-  {
-    id: "presale",
-    calculatorIds: ["presale"],
-    title: "Предпродажная подготовка",
-    tag: "Под ключ",
-    priceFrom: 29000,
-    duration: "1–2 дня",
-    description:
-      "Комплексное обновление внешнего вида и салона перед продажей: повышает ликвидность и итоговую цену авто до 15%.",
-    highlights: [
-      "Освежающая полировка + быстрый защитный состав",
-      "Комплексная чистка салона, багажника и подкапотного",
-      "Студийная фотосессия автомобиля для объявления",
+      "Dokładne odkurzanie, pędzelkowanie i czyszczenie plastików",
+      "Pranie ekstrakcyjne foteli i wykładzin lub pielęgnacja skóry",
+      "Ozonowanie kabiny usuwające zapachy i bakterie",
     ],
   },
 ];
@@ -142,64 +131,75 @@ export interface CalculatorService {
   title: string;
   shortTitle: string;
   description: string;
-  basePrice: number;
-  days: number;
-  exclusiveWith?: ServiceId;
-  badge?: string;
+  prices: Record<VehicleClassId, number>;
+  hours: number;
 }
 
 export const CALCULATOR_SERVICES: CalculatorService[] = [
   {
+    id: "wash",
+    title: "Mycie detailingowe z dekontaminacją",
+    shortTitle: "Mycie detailingowe",
+    description: "Mycie ręczne pH neutralne, felgi, wnęki drzwi i dressing opon",
+    prices: {
+      ab: 150,
+      cd: 180,
+      suv: 210,
+      big_suv: 250,
+    },
+    hours: 3,
+  },
+  {
+    id: "onestep",
+    title: "Polerowanie One-Step (odświeżenie lakieru)",
+    shortTitle: "Polerowanie One-Step",
+    description: "Usunięcie 50–65% mikrorys i zmatowień, głębia koloru",
+    prices: {
+      ab: 900,
+      cd: 1000,
+      suv: 1100,
+      big_suv: 1200,
+    },
+    hours: 8,
+  },
+  {
     id: "ceramic",
-    title: "Керамика 9H + восстановительная полировка",
-    shortTitle: "Керамика и полировка",
-    description: "2–3 этапа полировки, обезжиривание, 2 слоя керамики + топ-коут",
-    basePrice: 35000,
-    days: 2,
-    badge: "Популярно",
-  },
-  {
-    id: "ppf_front",
-    title: "Оклейка зон риска полиуретаном",
-    shortTitle: "Полиуретан (зоны риска)",
-    description: "Капот, бампер, передние крылья, фары, зеркала, стойки и полоса крыши",
-    basePrice: 65000,
-    days: 2,
-    exclusiveWith: "ppf_full",
-  },
-  {
-    id: "ppf_full",
-    title: "Полная оклейка кузова полиуретаном",
-    shortTitle: "Полная оклейка PPF",
-    description: "100% кузова в глянцевый или сатиновый (матовый) полиуретан с подворотами",
-    basePrice: 185000,
-    days: 5,
-    exclusiveWith: "ppf_front",
-    badge: "Гарантия 5 лет",
+    title: "Powłoka ceramiczna 9H (3–5 lat)",
+    shortTitle: "Powłoka ceramiczna",
+    description: "2 warstwy ceramiki, silny efekt hydrofobowy i szklistość",
+    prices: {
+      ab: 1400,
+      cd: 1600,
+      suv: 1800,
+      big_suv: 2000,
+    },
+    hours: 16,
   },
   {
     id: "interior",
-    title: "Детейлинг-химчистка салона + озонация",
-    shortTitle: "Химчистка салона",
-    description: "Полная очистка кожи, текстиля, пластика и консервация защитным кремом",
-    basePrice: 18000,
-    days: 1,
+    title: "Pranie tapicerki i detailing wnętrza",
+    shortTitle: "Detailing wnętrza",
+    description: "Pranie ekstrakcyjne / pielęgnacja skór, plastiki, szyby, ozonowanie",
+    prices: {
+      ab: 450,
+      cd: 520,
+      suv: 600,
+      big_suv: 700,
+    },
+    hours: 6,
   },
   {
-    id: "presale",
-    title: "Предпродажная подготовка «под ключ»",
-    shortTitle: "Предпродажная подготовка",
-    description: "Лёгкая полировка, чистка салона, мойка двигателя паром, чернение и фото",
-    basePrice: 29000,
-    days: 1,
-  },
-  {
-    id: "glass_wheels",
-    title: "Антидождь на все стёкла + керамика дисков",
-    shortTitle: "Антидождь и диски",
-    description: "Улучшенная видимость в ливень и защита дисков от тормозной пыли",
-    basePrice: 9500,
-    days: 0.5,
+    id: "ppf_front",
+    title: "Folia ochronna PPF (strefy ryzyka)",
+    shortTitle: "Folia PPF (przód)",
+    description: "Zderzak, maska, reflektory, lusterka i wnęki klamek",
+    prices: {
+      ab: 2600,
+      cd: 2900,
+      suv: 3300,
+      big_suv: 3700,
+    },
+    hours: 16,
   },
 ];
 
@@ -217,45 +217,51 @@ export interface ReviewItem {
 export const REVIEWS: ReviewItem[] = [
   {
     id: "rev-1",
-    author: "Алексей Соколов",
-    car: "BMW X5 G05",
-    service: "Оклейка зон риска + керамика 9H",
-    date: "Октябрь 2026",
+    author: "Marek Kowalski",
+    car: "BMW Serii 3 G20",
+    service: "One-Step + Powłoka ceramiczna",
+    date: "Październik 2026",
     rating: 5,
-    text: "Забирал новый X5 прямо из салона и сразу пригнал в APEX. Ребята идеально затянули всю переднюю часть в полиуретан SunTek — стыков и подворотов вообще не видно, даже если вглядываться вплотную. На остальной кузов положили керамику, цвет «чёрный сапфир» стал буквально бездонным. Отдельное спасибо за ежедневные фотоотчёты в Telegram.",
-    initials: "АС",
+    text: "Oddałem czarne BMW z wyraźnymi rysami po myjniach automatycznych. Po korekcie One-Step i położeniu ceramiki lakier wygląda lepiej niż przy odbiorze z salonu. Świetny kontakt na WhatsApp, jasna wycena przed pracą i terminowość co do godziny.",
+    initials: "MK",
   },
   {
     id: "rev-2",
-    author: "Дмитрий Воронов",
-    car: "Porsche Cayenne Coupe",
-    service: "Восстановительная полировка + химчистка",
-    date: "Сентябрь 2026",
+    author: "Piotr Zieliński",
+    car: "Volvo XC60",
+    service: "Pranie i detailing wnętrza",
+    date: "Wrzesień 2026",
     rating: 5,
-    text: "После двух московских зим на кузове появилась мелкая паутинка от моек, а светлая кожа на водительском кресле заметно потемнела. Здесь реально светлая стерильная студия и адекватные мастера — сначала показали все нюансы под лампами и замерили толщину лака. Забрал машину как из шоурума: кожа снова матовая, ни одного развода или запаха химии.",
-    initials: "ДВ",
+    text: "Jasna skórzana tapicerka odzyskała fabryczny, matowy wygląd bez tłustego nalotu. Wnętrze jest sterylnie czyste, bez sztucznych zapachów. Widać, że studio pracuje na topowej chemii i nie oszczędza czasu na detale.",
+    initials: "PZ",
   },
   {
     id: "rev-3",
-    author: "Екатерина Морозова",
-    car: "Mercedes-Benz E-Class",
-    service: "Предпродажная подготовка",
-    date: "Август 2026",
+    author: "Karolina Nowak",
+    car: "Audi Q5",
+    service: "Mycie detailingowe + PPF przód",
+    date: "Sierpień 2026",
     rating: 5,
-    text: "Готовила машину к продаже и решила сделать комплекс под ключ. Честно, когда увидела результат — даже задумалась, а стоит ли продавать. Моторный отсек идеально чистый, кузов сияет, царапины на дверях исчезли. Продала автомобиль первому же покупателю на 180 тысяч дороже рынка буквально за два дня. Рекомендую!",
-    initials: "ЕМ",
+    text: "Czyste, minimalistyczne studio na Mokotowie z doskonałym oświetleniem. Folia ochronna na przodzie została położona z zawinięciem krawędzi — praktycznie niewidoczna. Zdecydowanie polecam każdemu, kto dba o swoje auto.",
+    initials: "KN",
   },
 ];
 
 export const PARTNER_BRANDS = [
   "KOCH-CHEMIE",
-  "LLUMAR",
-  "GYEON QUARTZ",
-  "SUNTEK",
-  "RUPES",
+  "GYEON",
   "SONAX PROFILINE",
+  "RUPES",
+  "LLUMAR",
+  "CARPRO",
 ];
 
-export function formatRubles(amount: number): string {
-  return new Intl.NumberFormat("ru-RU").format(Math.round(amount)) + " ₽";
+export function formatPLN(amount: number): string {
+  return new Intl.NumberFormat("pl-PL").format(Math.round(amount)) + " zł";
+}
+
+export function buildWhatsAppUrl(message: string): string {
+  return `https://wa.me/${STUDIO_INFO.whatsappNumber}?text=${encodeURIComponent(
+    message
+  )}`;
 }

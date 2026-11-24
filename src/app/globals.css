@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-obsidian: #08090c;
-  --color-graphite: #101218;
-  --color-graphite-light: #171a23;
-  --color-amber-neon: #f59e0b;
-  --color-amber-bright: #ffb830;
+  --color-obsidian: #09090b;
+  --color-surface: #111114;
+  --color-surface-elevated: #18181b;
   --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
   --font-display: var(--font-unbounded), "Unbounded", system-ui, sans-serif;
 }
@@ -13,95 +11,87 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #08090c;
-    color: #f3f4f6;
+    background-color: #09090b;
+    color: #f4f4f5;
   }
 
   body {
-    background-color: #08090c;
-    color: #f3f4f6;
+    background-color: #09090b;
+    color: #f4f4f5;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: rgba(245, 158, 11, 0.3);
-    color: #fff7ed;
+    background-color: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
   }
 }
 
-/* Custom sleek glassmorphism & neon helpers */
-.glass-card {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.048) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 20px 50px -24px rgba(0, 0, 0, 0.85);
+/* Minimalist monochrome architectural surfaces */
+.mono-card {
+  background-color: rgba(24, 24, 27, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
-.glass-card-hover {
+.mono-card-hover {
   transition:
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.glass-card-hover:hover {
-  transform: translateY(-3px);
-  border-color: rgba(245, 158, 11, 0.32);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 24px 60px -20px rgba(0, 0, 0, 0.9),
-    0 0 32px -12px rgba(245, 158, 11, 0.22);
+.mono-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  background-color: rgba(24, 24, 27, 0.78);
+  transform: translateY(-2px);
 }
 
-.neon-amber-btn {
-  background: linear-gradient(135deg, #ffb830 0%, #f59e0b 52%, #d97706 100%);
-  box-shadow:
-    0 0 28px -6px rgba(245, 158, 11, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+.btn-primary-white {
+  background-color: #ffffff;
+  color: #09090b;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.25s ease,
-    filter 0.25s ease;
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    opacity 0.2s ease;
 }
 
-.neon-amber-btn:hover {
-  filter: brightness(1.06);
-  box-shadow:
-    0 0 38px -4px rgba(245, 158, 11, 0.72),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+.btn-primary-white:hover {
+  background-color: #e4e4e7;
 }
 
-.neon-amber-btn:active {
+.btn-primary-white:active {
   transform: scale(0.985);
 }
 
-.bg-grid-subtle {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
+.btn-secondary-mono {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Custom scrollbar */
+.btn-secondary-mono:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+/* Subtle custom monochrome scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090c;
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232734;
+  background: #27272a;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #71717a;
 }
